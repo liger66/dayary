@@ -1,4 +1,4 @@
-package com.inc.dayary.service;
+package com.inc.dayary.repository;
 
 import java.util.List;
 
@@ -13,9 +13,7 @@ public class DiaryDao {
 	@Autowired
 	private SqlSession sqlsession;
 
-	List<Diary> list() {
-		return sqlsession.selectList("diary.select");
+	public List<Diary> list() {
+		return sqlsession.selectList("diary.list");
 	}
-	
-	
 }

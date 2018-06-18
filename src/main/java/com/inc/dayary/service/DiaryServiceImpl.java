@@ -7,15 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inc.dayary.domain.Diary;
+import com.inc.dayary.repository.DiaryDao;
 
 @Service
 public class DiaryServiceImpl implements DiaryService {
 	@Autowired
-	private SqlSession sqlSession;
+	private DiaryDao diaryDao;
 
 	@Override
 	public List<Diary> list() {
-		return sqlSession.selectList("diary.list");
+		return diaryDao.list();
 	}
 	
 }
