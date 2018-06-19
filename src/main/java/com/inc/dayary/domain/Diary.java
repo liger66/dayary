@@ -1,9 +1,15 @@
 package com.inc.dayary.domain;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class Diary {
 	private int id;
 	private String u_id;
+	@Size(min=1, max=15, message="15글자 이내로 작성 해 주세요.")
 	private String title;
+	@NotEmpty(message="내용을 입력 하세요.")
+	@Size(max=500, message="500글자 이내로 작성 해 주세요.")
 	private String content;
 	private String regdate;
 	

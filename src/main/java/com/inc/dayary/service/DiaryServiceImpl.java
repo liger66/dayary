@@ -18,5 +18,10 @@ public class DiaryServiceImpl implements DiaryService {
 	public List<Diary> list() {
 		return diaryDao.list();
 	}
+
+	@Override
+	public void add(Diary diary) {
+		diaryDao.insert(diary);
+	}
 	
 }
