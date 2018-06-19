@@ -20,7 +20,7 @@
 			</a>
 		</div>
 		<#list diaryList as diary>
-			<#if !diaryList.hasContent>
+			<#if !diaryList?hasContent>
 				<div class="row">
 					<h4 classs="text-center">일기를 작성 하세요.</h4>
 				</div>
