@@ -11,4 +11,13 @@ create table diary (
 
 create sequence seq_diary_id;
 
-insert into diary values (seq_diary_id.nextval, 'liger66', '첫번재 작성222', '첫번째 222작성 내용이다.', sysdate);
+insert into diary values (seq_diary_id.nextval, 'liger66', '3번재 작성333', '2번째 333 내용이다.', sysdate);
+select * from diary;
+
+create table member (
+    id varchar2(10) primary key,
+    password varchar2(10),
+    name varchar2(30),
+    email varchar2(30) unique,
+    gender char(1) check(gender in('m','f'))
+);
