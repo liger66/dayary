@@ -17,9 +17,11 @@ public class DiaryDao {
 		return sqlsession.selectList("diary.list");
 	}
 
-	public void insert(Diary diary) {
-		
-		sqlsession.insert("diary.insert", diary);
-		
+	public void insert(Diary diary) {		
+		sqlsession.insert("diary.insert", diary);		
+	}
+
+	public List<Diary> list(String id) {
+		return sqlsession.selectList("diary.list", id);
 	}
 }

@@ -9,10 +9,13 @@ create table diary (
     regdate date
 );
 
+alter table add constraint fk_diary_u_id foreign key(u_id) references member(id); 
+
 create sequence seq_diary_id;
 
 insert into diary values (seq_diary_id.nextval, 'liger66', '3번재 작성333', '2번째 333 내용이다.', sysdate);
 select * from diary;
+select * from member;
 
 create table member (
     id varchar2(10) primary key,

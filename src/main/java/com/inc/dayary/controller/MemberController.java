@@ -33,6 +33,28 @@ public class MemberController {
 		return "member/signup";
 	}
 	
+	@PostMapping ("/member/signin")
+	public String signin(@ModelAttribute Member member, BindingResult result, 
+						HttpServletRequest request, Model model) {
+		Member savedMember = memberService.fineOne(member.getId());
+		
+		if (savedMember == null) {
+			result.addError(new FieldError("notExsist", "id", "존재하지 않는 아디네요."));
+		} else if (!savedMember.getPassword().equals(member.getPassword())) {
+			result.addError(new FieldError("notExsist", "password", "비밀번호에러."));	
+		}
+		
+		if (result.hasErrors()) {
+			model.addAttribute("id", member.getId());
+			return "member/signin";
+		}
+		
+		request.getSession().invalidate();
+		request.getSession().setAttribute("member", member);
+		
+		return "redirect:/";
+	}
+	
 	@PostMapping ("/member/signup")
 	public String signup(@ModelAttribute @Valid Member member, BindingResult result, HttpSession session){
 		if (memberService.fineOne(member.getId()) != null) {
@@ -97,6 +119,19 @@ public class MemberController {
 		session.setAttribute("emailCode", emailCode);
 		return "success";
 	}
+	
+	@GetMapping("/member/signin")
+	public String signin(Model model) {
+		model.addAttribute("member", new Member());
+		return "member/signin";
+	}
+	
+	@GetMapping("/member/signout")
+	public String signout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/member/signin";
+	}
+
 
 	private boolean emailValidator(String email) {
 		return Pattern.compile("([A-Za-z0-9]+@[A-Za-z0-9]+.[A-Za-z]{2,10})")
